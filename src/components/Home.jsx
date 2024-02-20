@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ProductAction } from "../redux/action/ProductAction";
+import { CounterContext } from "../Context/CounterContext";
+import { CartContext } from "../Context/cartContext";
 
 const Home = () => {
+  const { counter, setcounter } = useContext(CounterContext);
+  const { data, setData } = useContext(CartContext);
   const nav = useNavigate();
   // const [data, setData] = useState([]);
   const dispatch = useDispatch();
@@ -18,12 +22,20 @@ const Home = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // console.log(data);
   console.log("ProductData", ProductData);
   return (
     <div className="container">
+      {/* <h1>Count: {counter}</h1>
+      <button onClick={() => setcounter((p) => p + 5)}>Increment</button> */}
+      {/* <div>
+        <h1>Count: {data}</h1>
+        <button onClick={() => setData((p) => p + 5)}>Increment</button>
+      </div> */}
+
       {ProductData.map((x) => (
         <div key={x.id} className="images">
           <img
